@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class SetupQuestions : MonoBehaviour
 {
@@ -22,11 +23,8 @@ public class SetupQuestions : MonoBehaviour
         GetNewQuestion();
         //sets up the text in the question area
         SetupQuestion();
-    }
-
-    void Update()
-    {
-        
+        //sets up the buttons in a randomized order and checks which one is the correct answer
+        SetupAnswer();
     }
 
     private void LoadQuestions()
@@ -52,6 +50,20 @@ public class SetupQuestions : MonoBehaviour
     private void SetupAnswer()
     {
         List<string> answers = RandomizeAnswerButtonsOrder(new List<string>(currentQuestion.answers));
+
+        //sets the answer buttons and checks if the button in the list is or isn't the correct answer
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            bool isCorrectAnswer = false;
+
+            if(i == correctAnswer)
+            {
+                isCorrectAnswer = true;
+            }
+
+            answerButtons[i].SetCorrectAnswer(isCorrectAnswer);
+            answerButtons[i].SetAnswerText(answers[i]);
+        }
     }
 
     private List<string> RandomizeAnswerButtonsOrder(List<string> originalOrder)
@@ -69,7 +81,7 @@ public class SetupQuestions : MonoBehaviour
             if (random == 0 && !correctAnswerPicked)
             {
                 correctAnswer = i;
-                correctAnswerPicked |= true;
+                correctAnswerPicked = true;
             }
 
             //adds the answer in this new order
