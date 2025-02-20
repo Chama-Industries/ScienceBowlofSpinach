@@ -19,3 +19,4 @@ MonoBehaviour:
   - Reflection
   - Refraction
   - Interference
+  image: {fileID: 0}
