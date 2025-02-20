@@ -2,15 +2,27 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class SetupQuestions : MonoBehaviour
 {
-    [SerializeField]
-    private List<QuestionBank> questions;
-    private QuestionBank currentQuestion;
-    [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private List<QuestionBank> questions;
     [SerializeField] private AnswerButtons[] answerButtons;
+    [SerializeField] private Image questionImage;
+    private QuestionBank currentQuestion;
+
+    [SerializeField] private TextMeshProUGUI p1QuestionText;
+    [SerializeField] private TextMeshProUGUI p2QuestionText;
+    [SerializeField] private TextMeshProUGUI playerTurn;
+
+    [SerializeField] private GameObject image;
+    [SerializeField] private GameObject p1Side;
+    [SerializeField] private GameObject p2Side;
+
     [SerializeField] private int correctAnswer;
+    private int turnDecider;
+    private bool p1Turn;
+    private bool p2Turn;
 
     private void Awake()
     {
@@ -20,6 +32,19 @@ public class SetupQuestions : MonoBehaviour
 
     void Start()
     {
+        //before setting up the questions it determines who's turn it is
+        //could possibly have a cool animation for this
+        turnDecider = Random.Range(0, 2);
+
+        if (turnDecider == 0)
+        {
+            p1Turn = true;
+        }
+        else if (turnDecider == 1)
+        {
+            p2Turn = true;
+        }
+
         GetNewQuestion();
         //sets up the text in the question area
         SetupQuestion();
@@ -32,8 +57,13 @@ public class SetupQuestions : MonoBehaviour
         questions = new List<QuestionBank>(Resources.LoadAll<QuestionBank>("Questions"));
     }
 
-    private void GetNewQuestion()
+    public void GetNewQuestion()
     {
+        if(questions.Count == 0)
+        {
+            LoadQuestions();
+        }    
+
         //randomly gets a question from the question folder
         int randomQuestion = Random.Range(0, questions.Count);
         //pulls up that random question
@@ -42,12 +72,41 @@ public class SetupQuestions : MonoBehaviour
         questions.RemoveAt(randomQuestion);
     }
 
-    private void SetupQuestion()
+    public void SetupQuestion()
     {
-        questionText.text = currentQuestion.question;
+        
+        if (p1Turn)
+        {
+            p1Side.SetActive(true);
+            p2Side.SetActive(false);
+            p1Turn = false;
+            playerTurn.text = "Player 1 Turn";
+            p1QuestionText.text = currentQuestion.question;
+            p2Turn = true;
+        }
+        else if(p2Turn)
+        {
+            p2Side.SetActive(true);
+            p1Side.SetActive(false);
+            p2Turn = false;
+            playerTurn.text = "Player 2 Turn";
+            p2QuestionText.text = currentQuestion.question;
+            p1Turn = true;
+        }
+
+        //determines if the image UI shows up or not if the question has an image
+        if (currentQuestion.image == null)
+        {
+            image.SetActive(false);
+        }
+        else
+        {
+            image.SetActive(true);
+            questionImage.sprite = currentQuestion.image;
+        }
     }
 
-    private void SetupAnswer()
+    public void SetupAnswer()
     {
         List<string> answers = RandomizeAnswerButtonsOrder(new List<string>(currentQuestion.answers));
 
