@@ -15,5 +15,5 @@ MonoBehaviour:
   m_SnapEnabled: 0
   m_SnapSettings:
     m_SnapToGrid: 1
-    m_Rotation: 15
+    m_Rotation: 45
     m_Scale: 1
