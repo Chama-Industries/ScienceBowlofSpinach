@@ -31,13 +31,28 @@ public class AnswerButtons : MonoBehaviour
         {
             Debug.Log("Correct");
 
-            setupQuestions.GetNewQuestion();
-            setupQuestions.SetupQuestion();
-            setupQuestions.SetupAnswer();
+
+            if(setupQuestions.p1Turn)
+            {
+                setupQuestions.p1Turn = false;
+                setupQuestions.p2Turn = true;
+                setupQuestions.LoadNewQuestion();
+            }
+            else if (setupQuestions.p2Turn)
+            {
+                Debug.Log("Setting up attack buttons");
+                setupQuestions.attackButtons.SetActive(true);
+                setupQuestions.p2Turn = false;
+                setupQuestions.p1Turn = true;
+            }
+
+            //setupQuestions.LoadNewQuestion();
         }
         else
         {
             Debug.Log("Wrong");
         }
+
+        //setupQuestions.LoadNewQuestion();
     }
 }

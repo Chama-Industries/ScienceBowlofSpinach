@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
     public float countdown;
     public bool timerOn = false;
     public TextMeshProUGUI time;
+    public Animator timerAnimator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +20,7 @@ public class Timer : MonoBehaviour
     {
         if (timerOn) 
         {
-            if(countdown > 0)
+            if (countdown > 1)
             {
                 countdown -= Time.deltaTime;
                 updateTimer(countdown);
@@ -27,21 +28,26 @@ public class Timer : MonoBehaviour
             else
             {
                 Debug.Log("Time's Up");
-                countdown = 0;
+                countdown = 1;
                 timerOn = false;
             }
         }
     }
 
-    void updateTimer(float countdown)
+    public void updateTimer(float countdown)
     {
         countdown = Mathf.FloorToInt(countdown);
-
         time.text = countdown.ToString();
     }
 
     public void ResetTime()
     {
+        countdown = 31;
+        timerOn = true;
 
+        if (timerAnimator != null)
+        {
+            timerAnimator.Play("Timer Animation", -1, 0f);
+        }
     }
 }

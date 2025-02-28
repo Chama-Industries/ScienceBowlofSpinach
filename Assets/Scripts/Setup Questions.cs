@@ -3,11 +3,14 @@ using TMPro;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using System.Collections;
 
 public class SetupQuestions : MonoBehaviour
 {
-    [SerializeField] private List<QuestionBank> questions;
+    private List<QuestionBank> questions;
     [SerializeField] private AnswerButtons[] answerButtons;
+    [SerializeField] private Button[] answerButtonActivation;
+    [SerializeField] private Timer timer;
     [SerializeField] private Image questionImage;
     private QuestionBank currentQuestion;
 
@@ -19,13 +22,26 @@ public class SetupQuestions : MonoBehaviour
     [SerializeField] private GameObject p1Side;
     [SerializeField] private GameObject p2Side;
 
-    [SerializeField] private int correctAnswer;
+    //this is temporary
+    public GameObject attackButtons;
+    public Button attack1;
+    public Button attack2;
+    private bool buttonsAnimationPlaying;
+    //
+
+    public Animator buttonsToP1;
+
+    private int correctAnswer;
     private int turnDecider;
-    private bool p1Turn;
-    private bool p2Turn;
+    public bool p1Turn;
+    public bool p2Turn;
 
     private void Awake()
     {
+        attackButtons.SetActive(false);
+        p1Side.SetActive(false);
+        p2Side.SetActive(false);
+
         //Gets all of the questions that are in the Questions folder
         LoadQuestions();
     }
@@ -45,16 +61,22 @@ public class SetupQuestions : MonoBehaviour
             p2Turn = true;
         }
 
-        GetNewQuestion();
-        //sets up the text in the question area
-        SetupQuestion();
-        //sets up the buttons in a randomized order and checks which one is the correct answer
-        SetupAnswer();
+        //timer.ResetTime();
+        LoadNewQuestion();
     }
 
     private void LoadQuestions()
     {
         questions = new List<QuestionBank>(Resources.LoadAll<QuestionBank>("Questions"));
+    }
+
+    public void LoadNewQuestion()
+    {
+        GetNewQuestion();
+        //sets up the text in the question area
+        SetupQuestion();
+        //sets up the buttons in a randomized order and checks which one is the correct answer
+        SetupAnswer();
     }
 
     public void GetNewQuestion()
@@ -74,24 +96,34 @@ public class SetupQuestions : MonoBehaviour
 
     public void SetupQuestion()
     {
-        
+        timer.ResetTime();
+
         if (p1Turn)
         {
-            p1Side.SetActive(true);
+            for (int i = 0; i < answerButtonActivation.Length; i++)
+            {
+                answerButtonActivation[i].enabled = false;
+            }
+
+            buttonsToP1.Play("To Player 1 Side", -1, 0f);
+            StartCoroutine(DelayForAnimation());
+            attackButtons.SetActive(false);
             p2Side.SetActive(false);
-            p1Turn = false;
             playerTurn.text = "Player 1 Turn";
             p1QuestionText.text = currentQuestion.question;
-            p2Turn = true;
         }
         else if(p2Turn)
         {
-            p2Side.SetActive(true);
+            for (int i = 0; i < answerButtonActivation.Length; i++)
+            {
+                answerButtonActivation[i].enabled = false;
+            }
+
+            //buttonsToP1.Play("To Player 1 Side", 0, 0f);
+            StartCoroutine(DelayForAnimation());
             p1Side.SetActive(false);
-            p2Turn = false;
             playerTurn.text = "Player 2 Turn";
             p2QuestionText.text = currentQuestion.question;
-            p1Turn = true;
         }
 
         //determines if the image UI shows up or not if the question has an image
@@ -150,5 +182,24 @@ public class SetupQuestions : MonoBehaviour
         }
 
         return newList;
+    }
+
+    public IEnumerator DelayForAnimation()
+    {
+        yield return new WaitForSeconds(2.2f);
+
+        for (int i = 0; i < answerButtonActivation.Length; i++)
+        {
+            answerButtonActivation[i].enabled = true;
+        }
+
+        if (p1Turn)
+        {
+            p1Side.SetActive(true);
+        }
+        else if (p2Turn)
+        {
+            p2Side.SetActive(true);
+        }
     }
 }

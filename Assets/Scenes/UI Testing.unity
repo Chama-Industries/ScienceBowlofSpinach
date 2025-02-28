@@ -2589,12 +2589,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1448fc37d67d6428df31aba2dc7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questions: []
   answerButtons:
   - {fileID: 1042733754}
   - {fileID: 76544671}
   - {fileID: 693379444}
   - {fileID: 1091918957}
+  timer: {fileID: 1230816814}
   questionImage: {fileID: 958189474}
   p1QuestionText: {fileID: 1420843675}
   p2QuestionText: {fileID: 1396886249}
@@ -2602,7 +2602,6 @@ MonoBehaviour:
   image: {fileID: 180480630}
   p1Side: {fileID: 667550708}
   p2Side: {fileID: 1836502210}
-  correctAnswer: 0
 --- !u!1 &1836502210
 GameObject:
   m_ObjectHideFlags: 0
