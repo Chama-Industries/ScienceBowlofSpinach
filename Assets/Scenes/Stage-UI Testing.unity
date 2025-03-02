@@ -296,6 +296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game UI (Original)
       objectReference: {fileID: 0}
+    - target: {fileID: 2771174376288186211, guid: b89e9ad3f97375b43ab1d15b3abf9ecf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8779617817561381103, guid: b89e9ad3f97375b43ab1d15b3abf9ecf, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1522,10 +1526,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 903617760825312837, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 903617760825312837, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 903617760825312837, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5062314583223138433, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
       propertyPath: m_Name
       value: Players
       objectReference: {fileID: 0}
+    - target: {fileID: 5574414733471356906, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574414733471356906, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574414733471356906, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536001942437282060, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536001942437282060, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: 82d23f34d60b8de4a9564d800928ad87, type: 3}
+    - target: {fileID: 8536001942437282060, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536001942437282060, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536001942437282060, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611520040385039796, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611520040385039796, guid: a6d403d511b15e741ac74de937ddf6e9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: 82d23f34d60b8de4a9564d800928ad87, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
