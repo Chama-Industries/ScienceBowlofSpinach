@@ -7,9 +7,12 @@ public class AnswerButtons : MonoBehaviour
     [SerializeField] private TextMeshProUGUI answer;
     private SetupQuestions setupQuestions;
 
+    private PlayersSetup playersSetup;
+
     private void Start()
     {
         setupQuestions = FindAnyObjectByType<SetupQuestions>();
+        playersSetup = FindAnyObjectByType<PlayersSetup>();
     }
 
     public void SetAnswerText(string answerText)
@@ -34,17 +37,19 @@ public class AnswerButtons : MonoBehaviour
 
             if(setupQuestions.p1Turn)
             {
+                playersSetup.p1SPMeter += 1;
+                playersSetup.p1SPSlider.value = playersSetup.p1SPMeter;
                 setupQuestions.p1AttackButtons.SetActive(true);
-                setupQuestions.p1Turn = false;
-                setupQuestions.p2Turn = true;
-                //setupQuestions.LoadNewQuestion();
+                //setupQuestions.p1Turn = false;
+                //setupQuestions.p2Turn = true;
             }
             else if (setupQuestions.p2Turn)
             {
-                Debug.Log("Setting up attack buttons");
+                playersSetup.p2SPMeter += 1;
+                playersSetup.p2SPSlider.value = playersSetup.p2SPMeter;
                 setupQuestions.p2AttackButtons.SetActive(true);
-                setupQuestions.p2Turn = false;
-                setupQuestions.p1Turn = true;
+                //setupQuestions.p2Turn = false;
+                //setupQuestions.p1Turn = true;
             }
 
             //setupQuestions.LoadNewQuestion();
@@ -53,7 +58,5 @@ public class AnswerButtons : MonoBehaviour
         {
             Debug.Log("Wrong");
         }
-
-        //setupQuestions.LoadNewQuestion();
     }
 }

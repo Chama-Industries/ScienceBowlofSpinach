@@ -21,16 +21,14 @@ public class SetupQuestions : MonoBehaviour
     [SerializeField] private GameObject image;
     [SerializeField] private GameObject p1Side;
     [SerializeField] private GameObject p2Side;
-
-    //this is temporary
     public GameObject p1AttackButtons;
     public GameObject p2AttackButtons;
-    public Button attack1;
-    public Button attack2;
-    private bool buttonsAnimationPlaying;
-    //
 
-    public Animator buttonsToP1;
+    #region This Is For Temporary Stuff
+
+    #endregion
+
+    public Animator buttonsSwitchingAni;
 
     private int correctAnswer;
     private int turnDecider;
@@ -107,7 +105,7 @@ public class SetupQuestions : MonoBehaviour
                 answerButtonActivation[i].enabled = false;
             }
 
-            buttonsToP1.Play("To Player 1 Side", -1, 0f);
+            buttonsSwitchingAni.Play("To Player 1 Side", -1, 0f);
             StartCoroutine(DelayForAnimation());
             p2AttackButtons.SetActive(false);
             p2Side.SetActive(false);
@@ -121,7 +119,7 @@ public class SetupQuestions : MonoBehaviour
                 answerButtonActivation[i].enabled = false;
             }
 
-            buttonsToP1.Play("To Player 2 Side", -1, 0f);
+            buttonsSwitchingAni.Play("To Player 2 Side", -1, 0f);
             StartCoroutine(DelayForAnimation());
             p1AttackButtons.SetActive(false);
             p1Side.SetActive(false);

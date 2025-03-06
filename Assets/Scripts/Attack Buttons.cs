@@ -5,53 +5,82 @@ public class AttackButtons : MonoBehaviour
     private SetupQuestions setupQuestions;
     public PlayersSetup playersSetup;
 
+    public playerActions playerActions;
+
     public bool attack1;
     public bool attack2;
+    public bool pass;
 
     private void Start()
     {
         setupQuestions = FindAnyObjectByType<SetupQuestions>();
+        playersSetup = FindAnyObjectByType<PlayersSetup>();
     }
 
     public void OnClick()
     {
-        if (attack1)
+        if (attack1 && (playersSetup.p1SPMeter == 1 || playersSetup.p2SPMeter == 1))
         {
-            DamagePlayer();
-            setupQuestions.LoadNewQuestion();
-        }
-        else if (attack2)
-        {
-            DamagePlayer();
-            setupQuestions.LoadNewQuestion();
-        }
-    }
+            //temporary
+            if (setupQuestions.p1Turn)
+            {
+                playersSetup.p1SPMeter -= 1;
+                playersSetup.p1SPSlider.value = playersSetup.p1SPMeter;
+                setupQuestions.p1Turn = false;
+                setupQuestions.p2Turn = true;
+            }
+            else if (setupQuestions.p2Turn)
+            {
+                playersSetup.p2SPMeter -= 1;
+                playersSetup.p2SPSlider.value = playersSetup.p2SPMeter;
+                setupQuestions.p2Turn = false;
+                setupQuestions.p1Turn = true;
+            }
+            //
 
-    public void DamagePlayer()
-    {
-        if(!setupQuestions.p1Turn && attack1)
-        {
-            playersSetup.p2Health -= 10;
+            playerActions.playerAttack();
+            setupQuestions.LoadNewQuestion();
         }
-        else if(!setupQuestions.p1Turn && attack2)
+        else if (attack2 && (playersSetup.p1SPMeter == 2 || playersSetup.p2SPMeter == 2))
         {
-            playersSetup.p2Health -= 5;
+            //temporary
+            if (setupQuestions.p1Turn)
+            {
+                playersSetup.p1SPMeter -= 2;
+                playersSetup.p1SPSlider.value = playersSetup.p1SPMeter;
+                setupQuestions.p1Turn = false;
+                setupQuestions.p2Turn = true;
+            }
+            else if (setupQuestions.p2Turn)
+            {
+                playersSetup.p2SPMeter -= 2;
+                playersSetup.p2SPSlider.value = playersSetup.p2SPMeter;
+                setupQuestions.p2Turn = false;
+                setupQuestions.p1Turn = true;
+            }
+            //
+
+            playerActions.playerStrongAttack();
+            setupQuestions.LoadNewQuestion();
         }
-        else if(!setupQuestions.p2Turn && attack1)
+        else if(pass)
         {
-            Debug.Log("i'm damaging player 1");
-            Debug.Log("Player 1 health is " + playersSetup.p1Health);
-            playersSetup.p1Health -= 10;
-            playersSetup.p1HealthSlider.value = playersSetup.p1Health;
-            Debug.Log("now it's " + playersSetup.p1Health);
+            if(setupQuestions.p1Turn)
+            {
+                setupQuestions.p1Turn = false;
+                setupQuestions.p2Turn = true;
+            }
+            else if(setupQuestions.p2Turn)
+            {
+                setupQuestions.p2Turn = false;
+                setupQuestions.p1Turn = true;
+            }
+
+            setupQuestions.LoadNewQuestion();
         }
-        else if (!setupQuestions.p2Turn && attack2)
+        else
         {
-            Debug.Log("i'm damaging player 1");
-            Debug.Log("Player 1 health is " + playersSetup.p1Health);
-            playersSetup.p1Health -= 5;
-            playersSetup.p1HealthSlider.value = playersSetup.p1Health;
-            Debug.Log("now it's " + playersSetup.p1Health);
+            Debug.Log("pick another attack");
         }
     }
 }
