@@ -34,14 +34,15 @@ public class AnswerButtons : MonoBehaviour
 
             if(setupQuestions.p1Turn)
             {
+                setupQuestions.p1AttackButtons.SetActive(true);
                 setupQuestions.p1Turn = false;
                 setupQuestions.p2Turn = true;
-                setupQuestions.LoadNewQuestion();
+                //setupQuestions.LoadNewQuestion();
             }
             else if (setupQuestions.p2Turn)
             {
                 Debug.Log("Setting up attack buttons");
-                setupQuestions.attackButtons.SetActive(true);
+                setupQuestions.p2AttackButtons.SetActive(true);
                 setupQuestions.p2Turn = false;
                 setupQuestions.p1Turn = true;
             }

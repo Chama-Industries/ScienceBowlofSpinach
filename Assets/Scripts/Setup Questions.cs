@@ -23,7 +23,8 @@ public class SetupQuestions : MonoBehaviour
     [SerializeField] private GameObject p2Side;
 
     //this is temporary
-    public GameObject attackButtons;
+    public GameObject p1AttackButtons;
+    public GameObject p2AttackButtons;
     public Button attack1;
     public Button attack2;
     private bool buttonsAnimationPlaying;
@@ -38,7 +39,8 @@ public class SetupQuestions : MonoBehaviour
 
     private void Awake()
     {
-        attackButtons.SetActive(false);
+        p1AttackButtons.SetActive(false);
+        p2AttackButtons.SetActive(false);
         p1Side.SetActive(false);
         p2Side.SetActive(false);
 
@@ -107,7 +109,7 @@ public class SetupQuestions : MonoBehaviour
 
             buttonsToP1.Play("To Player 1 Side", -1, 0f);
             StartCoroutine(DelayForAnimation());
-            attackButtons.SetActive(false);
+            p2AttackButtons.SetActive(false);
             p2Side.SetActive(false);
             playerTurn.text = "Player 1 Turn";
             p1QuestionText.text = currentQuestion.question;
@@ -119,8 +121,9 @@ public class SetupQuestions : MonoBehaviour
                 answerButtonActivation[i].enabled = false;
             }
 
-            //buttonsToP1.Play("To Player 1 Side", 0, 0f);
+            buttonsToP1.Play("To Player 2 Side", -1, 0f);
             StartCoroutine(DelayForAnimation());
+            p1AttackButtons.SetActive(false);
             p1Side.SetActive(false);
             playerTurn.text = "Player 2 Turn";
             p2QuestionText.text = currentQuestion.question;
