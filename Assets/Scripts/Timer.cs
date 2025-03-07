@@ -4,14 +4,19 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float countdown;
+    public float totalCountdown;
     public bool timerOn = false;
     public TextMeshProUGUI time;
     public Animator timerAnimator;
 
+    private float countdown;
+    private SetupQuestions setupQuestions;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        setupQuestions = FindAnyObjectByType<SetupQuestions>();
+        countdown = totalCountdown;
         timerOn = true;
     }
 
@@ -30,6 +35,19 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time's Up");
                 countdown = 1;
                 timerOn = false;
+
+                if (setupQuestions.p1Turn)
+                {
+                    setupQuestions.p1Turn = false;
+                    setupQuestions.p2Turn = true;
+                }
+                else if (setupQuestions.p2Turn)
+                {
+                    setupQuestions.p2Turn = false;
+                    setupQuestions.p1Turn = true;
+                }
+
+                setupQuestions.LoadNewQuestion();
             }
         }
     }
@@ -42,7 +60,7 @@ public class Timer : MonoBehaviour
 
     public void ResetTime()
     {
-        countdown = 31;
+        countdown = totalCountdown + 1;
         timerOn = true;
 
         if (timerAnimator != null)
