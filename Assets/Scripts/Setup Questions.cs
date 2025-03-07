@@ -18,13 +18,16 @@ public class SetupQuestions : MonoBehaviour
     [SerializeField] private TextMeshProUGUI p2QuestionText;
     [SerializeField] private TextMeshProUGUI playerTurn;
 
-    [SerializeField] private GameObject image;
+    [SerializeField] public GameObject image;
     [SerializeField] private GameObject p1Side;
     [SerializeField] private GameObject p2Side;
     public GameObject p1AttackButtons;
     public GameObject p2AttackButtons;
 
     #region This Is For Temporary Stuff
+
+    public Animator introBattleAnimation;
+    public GameObject wrongAnswerPopUp;
 
     #endregion
 
@@ -41,6 +44,8 @@ public class SetupQuestions : MonoBehaviour
         p2AttackButtons.SetActive(false);
         p1Side.SetActive(false);
         p2Side.SetActive(false);
+        image.SetActive(false);
+        wrongAnswerPopUp.SetActive(false);
 
         //Gets all of the questions that are in the Questions folder
         LoadQuestions();
@@ -48,6 +53,8 @@ public class SetupQuestions : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(IntroAnimation());
+
         //before setting up the questions it determines who's turn it is
         //could possibly have a cool animation for this
         turnDecider = Random.Range(0, 2);
@@ -127,16 +134,16 @@ public class SetupQuestions : MonoBehaviour
             p2QuestionText.text = currentQuestion.question;
         }
 
-        //determines if the image UI shows up or not if the question has an image
-        if (currentQuestion.image == null)
-        {
-            image.SetActive(false);
-        }
-        else
-        {
-            image.SetActive(true);
-            questionImage.sprite = currentQuestion.image;
-        }
+        ////determines if the image UI shows up or not if the question has an image
+        //if (currentQuestion.image == null)
+        //{
+        //    image.SetActive(false);
+        //}
+        //else
+        //{
+        //    image.SetActive(true);
+        //    questionImage.sprite = currentQuestion.image;
+        //}
     }
 
     public void SetupAnswer()
@@ -202,5 +209,23 @@ public class SetupQuestions : MonoBehaviour
         {
             p2Side.SetActive(true);
         }
+
+        //determines if the image UI shows up or not if the question has an image
+        if (currentQuestion.image == null)
+        {
+            image.SetActive(false);
+        }
+        else
+        {
+            image.SetActive(true);
+            questionImage.sprite = currentQuestion.image;
+        }
+    }
+
+    private IEnumerator IntroAnimation()
+    {
+        introBattleAnimation.Play("Players Battle Intro", -1, 0f);
+        yield return new WaitForSeconds(2.1f);
+        //LoadNewQuestion();
     }
 }

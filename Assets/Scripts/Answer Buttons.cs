@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class AnswerButtons : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class AnswerButtons : MonoBehaviour
         if (isCorrect)
         {
             Debug.Log("Correct");
-
+            setupQuestions.image.SetActive(false);
 
             if(setupQuestions.p1Turn)
             {
@@ -57,6 +58,26 @@ public class AnswerButtons : MonoBehaviour
         else
         {
             Debug.Log("Wrong");
+            StartCoroutine(WrongAnswerPopUp());
+            setupQuestions.LoadNewQuestion();
         }
+    }
+
+    private IEnumerator WrongAnswerPopUp()
+    {
+        if (setupQuestions.p1Turn)
+        {
+            setupQuestions.p1Turn = false;
+            setupQuestions.p2Turn = true;
+        }
+        else if (setupQuestions.p2Turn)
+        {
+            setupQuestions.p2Turn = false;
+            setupQuestions.p1Turn = true;
+        }
+
+        setupQuestions.wrongAnswerPopUp.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        setupQuestions.wrongAnswerPopUp.SetActive(false);
     }
 }

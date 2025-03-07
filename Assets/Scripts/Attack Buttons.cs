@@ -19,7 +19,7 @@ public class AttackButtons : MonoBehaviour
 
     public void OnClick()
     {
-        if (attack1 && (playersSetup.p1SPMeter == 1 || playersSetup.p2SPMeter == 1))
+        if (attack1 && (playersSetup.p1SPMeter >= 1 || playersSetup.p2SPMeter >= 1))
         {
             //temporary
             if (setupQuestions.p1Turn)
@@ -41,7 +41,7 @@ public class AttackButtons : MonoBehaviour
             playerActions.playerAttack();
             setupQuestions.LoadNewQuestion();
         }
-        else if (attack2 && (playersSetup.p1SPMeter == 2 || playersSetup.p2SPMeter == 2))
+        else if (attack2 && (playersSetup.p1SPMeter >= 2 || playersSetup.p2SPMeter >= 2))
         {
             //temporary
             if (setupQuestions.p1Turn)
