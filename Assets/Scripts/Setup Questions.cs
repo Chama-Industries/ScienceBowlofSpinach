@@ -9,7 +9,7 @@ public class SetupQuestions : MonoBehaviour
 {
     private List<QuestionBank> questions;
     [SerializeField] private AnswerButtons[] answerButtons;
-    [SerializeField] private Button[] answerButtonActivation;
+    [SerializeField] public Button[] answerButtonActivation;
     [SerializeField] private Timer timer;
     [SerializeField] private Image questionImage;
     private QuestionBank currentQuestion;
@@ -105,45 +105,25 @@ public class SetupQuestions : MonoBehaviour
     {
         timer.ResetTime();
 
+        for (int i = 0; i < answerButtonActivation.Length; i++)
+        {
+            answerButtonActivation[i].enabled = false;
+        }
+
         if (p1Turn)
         {
-            for (int i = 0; i < answerButtonActivation.Length; i++)
-            {
-                answerButtonActivation[i].enabled = false;
-            }
-
             buttonsSwitchingAni.Play("To Player 1 Side", -1, 0f);
             StartCoroutine(DelayForAnimation());
             p2AttackButtons.SetActive(false);
-            p2Side.SetActive(false);
-            playerTurn.text = "Player 1 Turn";
             p1QuestionText.text = currentQuestion.question;
         }
         else if(p2Turn)
         {
-            for (int i = 0; i < answerButtonActivation.Length; i++)
-            {
-                answerButtonActivation[i].enabled = false;
-            }
-
             buttonsSwitchingAni.Play("To Player 2 Side", -1, 0f);
             StartCoroutine(DelayForAnimation());
             p1AttackButtons.SetActive(false);
-            p1Side.SetActive(false);
-            playerTurn.text = "Player 2 Turn";
             p2QuestionText.text = currentQuestion.question;
         }
-
-        ////determines if the image UI shows up or not if the question has an image
-        //if (currentQuestion.image == null)
-        //{
-        //    image.SetActive(false);
-        //}
-        //else
-        //{
-        //    image.SetActive(true);
-        //    questionImage.sprite = currentQuestion.image;
-        //}
     }
 
     public void SetupAnswer()
@@ -190,6 +170,27 @@ public class SetupQuestions : MonoBehaviour
         }
 
         return newList;
+    }
+
+    public void SwitchTurns()
+    {
+        p1Turn = !p1Turn;
+        p2Turn = !p2Turn;
+
+        if (p1Turn)
+        {
+            playerTurn.text = "Player 1 Turn";
+            p1Side.SetActive(true);
+            p2Side.SetActive(false);
+        }
+        else if (p2Turn)
+        {
+            playerTurn.text = "Player 2 Turn";
+            p1Side.SetActive(false);
+            p2Side.SetActive(true);
+        }
+
+        LoadNewQuestion();
     }
 
     public IEnumerator DelayForAnimation()

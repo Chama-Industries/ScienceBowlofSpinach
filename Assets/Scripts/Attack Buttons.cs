@@ -26,20 +26,16 @@ public class AttackButtons : MonoBehaviour
             {
                 playersSetup.p1SPMeter -= 1;
                 playersSetup.p1SPSlider.value = playersSetup.p1SPMeter;
-                setupQuestions.p1Turn = false;
-                setupQuestions.p2Turn = true;
             }
             else if (setupQuestions.p2Turn)
             {
                 playersSetup.p2SPMeter -= 1;
                 playersSetup.p2SPSlider.value = playersSetup.p2SPMeter;
-                setupQuestions.p2Turn = false;
-                setupQuestions.p1Turn = true;
             }
             //
 
             playerActions.playerAttack();
-            setupQuestions.LoadNewQuestion();
+            setupQuestions.SwitchTurns();
         }
         else if (attack2 && (playersSetup.p1SPMeter >= 2 || playersSetup.p2SPMeter >= 2))
         {
@@ -48,35 +44,20 @@ public class AttackButtons : MonoBehaviour
             {
                 playersSetup.p1SPMeter -= 2;
                 playersSetup.p1SPSlider.value = playersSetup.p1SPMeter;
-                setupQuestions.p1Turn = false;
-                setupQuestions.p2Turn = true;
             }
             else if (setupQuestions.p2Turn)
             {
                 playersSetup.p2SPMeter -= 2;
                 playersSetup.p2SPSlider.value = playersSetup.p2SPMeter;
-                setupQuestions.p2Turn = false;
-                setupQuestions.p1Turn = true;
             }
             //
 
             playerActions.playerStrongAttack();
-            setupQuestions.LoadNewQuestion();
+            setupQuestions.SwitchTurns();
         }
         else if(pass)
         {
-            if(setupQuestions.p1Turn)
-            {
-                setupQuestions.p1Turn = false;
-                setupQuestions.p2Turn = true;
-            }
-            else if(setupQuestions.p2Turn)
-            {
-                setupQuestions.p2Turn = false;
-                setupQuestions.p1Turn = true;
-            }
-
-            setupQuestions.LoadNewQuestion();
+            setupQuestions.SwitchTurns();
         }
         else
         {
