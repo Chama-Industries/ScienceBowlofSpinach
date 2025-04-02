@@ -9,8 +9,11 @@ public class AnswerButtons : MonoBehaviour
     private SetupQuestions setupQuestions;
     private Timer timer;
     private PlayersSetup playersSetup;
+    private playerActions playerActions;
     private int p1RAStreak = 0;
     private int p2RAStreak = 0;
+    public GameObject player1;
+    public GameObject player2;
 
     private void Start()
     {
@@ -31,7 +34,14 @@ public class AnswerButtons : MonoBehaviour
 
     public void OnClick()
     {
-        //after one of the buttons are clicked it loads up a new question
+        if(setupQuestions.p1Turn)
+        {
+            playerActions = player1.GetComponent<playerActions>();
+        }
+        else if(setupQuestions.p2Turn)
+        {
+            playerActions = player2.GetComponent<playerActions>();
+        }
 
         if (isCorrect)
         {
@@ -46,11 +56,17 @@ public class AnswerButtons : MonoBehaviour
                 {
                     if (p1RAStreak >= 5)
                     {
+                        Debug.Log("action charges for p1 was " + playerActions.actionCharges);
                         playersSetup.p1SPMeter += 2;
+                        playerActions.actionCharges += 2;
+                        Debug.Log("action charges for p1 now is " + playerActions.actionCharges);
                     }
                     else
                     {
+                        Debug.Log("action charges for p1 was " + playerActions.actionCharges);
                         playersSetup.p1SPMeter += 1;
+                        playerActions.actionCharges += 1;
+                        Debug.Log("action charges for p1 now is " + playerActions.actionCharges);
                     }
                 }
 
@@ -65,11 +81,17 @@ public class AnswerButtons : MonoBehaviour
                 {
                     if (p2RAStreak >= 5)
                     {
+                        Debug.Log("action charges for p2 was " + playerActions.actionCharges);
                         playersSetup.p2SPMeter += 2;
+                        playerActions.actionCharges += 2;
+                        Debug.Log("action charges for p2 now is " + playerActions.actionCharges);
                     }
                     else
                     {
+                        Debug.Log("action charges for p2 was " + playerActions.actionCharges);
                         playersSetup.p2SPMeter += 1;
+                        playerActions.actionCharges += 1;
+                        Debug.Log("action charges for p2 now is " + playerActions.actionCharges);
                     }
                 }
 

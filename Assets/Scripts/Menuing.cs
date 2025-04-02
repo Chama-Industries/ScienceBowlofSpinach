@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Menuing : MonoBehaviour
@@ -9,17 +10,17 @@ public class Menuing : MonoBehaviour
 
     [SerializeField] private Button button;
 
-    private void Start()
-    {
-        for (int i = 1; i < menuScreens.Length; i++)
-        {
-            menuScreens[i].SetActive(false);
-        }
-    }
+    //private void Start()
+    //{
+    //    for (int i = 1; i < menuScreens.Length; i++)
+    //    {
+    //        menuScreens[i].SetActive(false);
+    //    }
+    //}
 
     public void StartGame()
     {
-
+        SceneManager.LoadScene("Character Select Screen");
     }
 
     public void LoadGame()

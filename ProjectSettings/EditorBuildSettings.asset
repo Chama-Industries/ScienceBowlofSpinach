@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Title Menu.unity
+    guid: 01e6873b91da82a4eae7257c95414fdf
+  - enabled: 1
+    path: Assets/Scenes/Character Select Screen.unity
+    guid: 78be5ebb1e237bd4296f8c434aa5932c
+  - enabled: 1
+    path: Assets/Scenes/Lab Stage (testing).unity
+    guid: 5e0420cb8aeaf6f479cb7739f4fd70b5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0
