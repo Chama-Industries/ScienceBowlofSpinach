@@ -28,6 +28,15 @@ public class playerInfo
         playerHP = input;
     }
 
+    public void gainHP(double inHP)
+    {
+        playerHP += inHP;
+        if (playerHP > 100)
+        {
+            playerHP = 100;
+        }
+    }
+
     public double getShield()
     {
         return playerShield;
@@ -36,6 +45,15 @@ public class playerInfo
     public void setShield(double input)
     {
         playerShield = input;
+    }
+
+    public void gainShield(double inSh)
+    {
+        playerShield += inSh;
+        if (playerShield > 100)
+        {
+            playerShield = 100;
+        }
     }
 
     public int getActionBarCharges()
