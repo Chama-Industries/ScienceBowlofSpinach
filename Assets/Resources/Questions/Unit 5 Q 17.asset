@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a859095694e69634a9d100c34e04b2b1, type: 3}
+  m_Name: Unit 5 Q 17
+  m_EditorClassIdentifier: 
+  question: Which of the following substances is most basic?
+  answers:
+  - Hand soap with a pH of 10.0
+  - Window cleaner with a pH of 8.5
+  - Milk with a pH of 6.5
+  - Spit with a pH of 7.4
+  difficulty: Easy
+  image: {fileID: 0}

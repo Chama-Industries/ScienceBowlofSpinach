@@ -18,4 +18,5 @@ MonoBehaviour:
   - A
   - B
   - C
+  difficulty: Easy
   image: {fileID: 784306291, guid: 7a5cf447c4992c044b1dd9e15a01bb13, type: 3}

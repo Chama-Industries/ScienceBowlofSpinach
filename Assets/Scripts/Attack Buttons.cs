@@ -1,11 +1,19 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttackButtons : MonoBehaviour
 {
     private SetupQuestions setupQuestions;
     public PlayersSetup playersSetup;
-
     public playerActions playerActions;
+
+    //stuff here is possibly temporary
+    public Slider p1Health;
+    public Slider p2Health;
+    public GameObject winningScreen;
+    [SerializeField] private TextMeshProUGUI winner;
+    //
 
     public bool attack1;
     public bool attack2;
@@ -13,6 +21,7 @@ public class AttackButtons : MonoBehaviour
 
     private void Start()
     {
+        winningScreen.SetActive(false);
         setupQuestions = FindAnyObjectByType<SetupQuestions>();
         playersSetup = FindAnyObjectByType<PlayersSetup>();
     }
@@ -26,20 +35,36 @@ public class AttackButtons : MonoBehaviour
             {
                 playersSetup.p1SPMeter -= 1;
                 playersSetup.p1SPSlider.value = playersSetup.p1SPMeter;
-                setupQuestions.p1Turn = false;
-                setupQuestions.p2Turn = true;
             }
             else if (setupQuestions.p2Turn)
             {
                 playersSetup.p2SPMeter -= 1;
                 playersSetup.p2SPSlider.value = playersSetup.p2SPMeter;
-                setupQuestions.p2Turn = false;
-                setupQuestions.p1Turn = true;
             }
             //
 
             playerActions.playerAttack();
-            setupQuestions.LoadNewQuestion();
+
+            if (p1Health.value < 0.1f || p2Health.value < 0.1f) 
+            {
+                winningScreen.SetActive(true);
+
+                if (setupQuestions.p2Turn)
+                {
+                    winner.text = "Player 2 Wins!";
+                }
+                else if(setupQuestions.p1Turn)
+                {
+                    winner.text = "Player 1 Wins!";
+                }
+
+                setupQuestions.p2AttackButtons.SetActive(false);
+                setupQuestions.p1AttackButtons.SetActive(false);
+            }
+            else
+            {
+                setupQuestions.SwitchTurns();
+            }
         }
         else if (attack2 && (playersSetup.p1SPMeter >= 2 || playersSetup.p2SPMeter >= 2))
         {
@@ -48,39 +73,49 @@ public class AttackButtons : MonoBehaviour
             {
                 playersSetup.p1SPMeter -= 2;
                 playersSetup.p1SPSlider.value = playersSetup.p1SPMeter;
-                setupQuestions.p1Turn = false;
-                setupQuestions.p2Turn = true;
             }
             else if (setupQuestions.p2Turn)
             {
                 playersSetup.p2SPMeter -= 2;
                 playersSetup.p2SPSlider.value = playersSetup.p2SPMeter;
-                setupQuestions.p2Turn = false;
-                setupQuestions.p1Turn = true;
             }
             //
 
             playerActions.playerStrongAttack();
-            setupQuestions.LoadNewQuestion();
+
+            if (p1Health.value <= 0 || p2Health.value <= 0)
+            {
+                winningScreen.SetActive(true);
+
+                if (setupQuestions.p2Turn)
+                {
+                    winner.text = "Player 2 Wins!";
+                }
+                else if (setupQuestions.p1Turn)
+                {
+                    winner.text = "Player 1 Wins!";
+                }
+
+                setupQuestions.p2AttackButtons.SetActive(false);
+                setupQuestions.p1AttackButtons.SetActive(false);
+            }
+            else
+            {
+                setupQuestions.SwitchTurns();
+            }
         }
         else if(pass)
         {
-            if(setupQuestions.p1Turn)
-            {
-                setupQuestions.p1Turn = false;
-                setupQuestions.p2Turn = true;
-            }
-            else if(setupQuestions.p2Turn)
-            {
-                setupQuestions.p2Turn = false;
-                setupQuestions.p1Turn = true;
-            }
-
-            setupQuestions.LoadNewQuestion();
+            setupQuestions.SwitchTurns();
         }
         else
         {
             Debug.Log("pick another attack");
         }
+    }
+
+    public void SpecialAttack1()
+    {
+
     }
 }

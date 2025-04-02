@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a859095694e69634a9d100c34e04b2b1, type: 3}
+  m_Name: Unit 9 Q 13
+  m_EditorClassIdentifier: 
+  question: Which of the following is the correct speed of light within a vacuum?
+  answers:
+  - 3.0 x 10^8 m/s
+  - 3.0 x 10^7 m/s
+  - 3.0 x 10^9 m/s
+  - 3.0 x 10^10 m/s
+  difficulty: Hard
+  image: {fileID: 0}

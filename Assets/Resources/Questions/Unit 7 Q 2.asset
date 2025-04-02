@@ -18,4 +18,5 @@ MonoBehaviour:
   - Thermal
   - Conduction
   - Convection
+  difficulty: Easy
   image: {fileID: 2102191958, guid: b7646a2fd68149841a4009b7cc9b336f, type: 3}
