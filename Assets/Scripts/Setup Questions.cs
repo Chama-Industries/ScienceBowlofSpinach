@@ -7,6 +7,7 @@ using System.Collections;
 
 public class SetupQuestions : MonoBehaviour
 {
+    private string questionsToLoad;
     private List<QuestionBank> questions;
     [SerializeField] private AnswerButtons[] answerButtons;
     [SerializeField] public Button[] answerButtonActivation;
@@ -74,7 +75,14 @@ public class SetupQuestions : MonoBehaviour
 
     private void LoadQuestions()
     {
-        questions = new List<QuestionBank>(Resources.LoadAll<QuestionBank>("Questions"));
+        if (questionsToLoad == null)
+        {
+            questions = new List<QuestionBank>(Resources.LoadAll<QuestionBank>("Questions"));
+        }
+        else if (questionsToLoad != null)
+        {
+            questions = new List<QuestionBank>(Resources.LoadAll<QuestionBank>(questionsToLoad));
+        }
     }
 
     public void LoadNewQuestion()
@@ -170,6 +178,11 @@ public class SetupQuestions : MonoBehaviour
         }
 
         return newList;
+    }
+
+    public void SelectedCustomQuiz(string customQuiz)
+    {
+        questionsToLoad = customQuiz;
     }
 
     public void SwitchTurns()

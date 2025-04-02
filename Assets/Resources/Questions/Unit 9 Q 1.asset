@@ -18,4 +18,5 @@ MonoBehaviour:
   - It must have a medium to move through
   - Their frequency and wavelength are inversely proportional
   - They can undergo the Doppler Effect
+  difficulty: Hard
   image: {fileID: 0}

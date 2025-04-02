@@ -18,4 +18,5 @@ MonoBehaviour:
   - Decrease the amplitude
   - Increase the wavelength
   - Increase the amplitude
+  difficulty: Easy
   image: {fileID: 0}

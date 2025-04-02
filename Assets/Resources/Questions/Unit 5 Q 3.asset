@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a859095694e69634a9d100c34e04b2b1, type: 3}
-  m_Name: Unit 9 Q 3
+  m_Name: Unit 5 Q 3
   m_EditorClassIdentifier: 
-  question: Which wave has the smallest frequency?
+  question: What is a solute?
   answers:
-  - D
-  - A
-  - B
-  - C
+  - The substance being dissolved
+  - The substance that is dissolving
+  - Mixture that becomes uniformly mixed
+  - Mixture that stays serperated from solvent
   difficulty: Easy
-  image: {fileID: 784306291, guid: 7a5cf447c4992c044b1dd9e15a01bb13, type: 3}
+  image: {fileID: 0}

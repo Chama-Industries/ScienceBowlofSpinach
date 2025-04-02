@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a859095694e69634a9d100c34e04b2b1, type: 3}
-  m_Name: Unit 9 Q 3
+  m_Name: Unit 5 Q 8
   m_EditorClassIdentifier: 
-  question: Which wave has the smallest frequency?
+  question: How many joules of heat are needed to raise the temperature of 10.0g
+    of aluminum from 22 C to 55 C, if the specific heat of aluminum is 0.90 J/g C?
   answers:
-  - D
-  - A
-  - B
-  - C
-  difficulty: Easy
-  image: {fileID: 784306291, guid: 7a5cf447c4992c044b1dd9e15a01bb13, type: 3}
+  - 297 J
+  - 2.97 J
+  - 693 J
+  - 0.0027 J
+  difficulty: Hard
+  image: {fileID: 0}

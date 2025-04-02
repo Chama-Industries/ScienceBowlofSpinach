@@ -19,4 +19,5 @@ MonoBehaviour:
   - Reflection
   - Refraction
   - Interference
+  difficulty: Easy
   image: {fileID: 0}
