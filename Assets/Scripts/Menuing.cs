@@ -20,12 +20,12 @@ public class Menuing : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Character Select Screen");
+        SceneManager.LoadScene("Lab Stage (testing)");
     }
 
     public void LoadGame()
     {
-
+        SceneManager.LoadScene("Title Menu");
     }
 
     public void OpenScreen()
