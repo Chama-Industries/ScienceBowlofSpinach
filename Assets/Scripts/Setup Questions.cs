@@ -29,7 +29,8 @@ public class SetupQuestions : MonoBehaviour
 
     public Animator introBattleAnimation;
     public GameObject wrongAnswerPopUp;
-
+    public GameObject winnerPopUp;
+    [SerializeField] private TextMeshProUGUI winner;
     #endregion
 
     public Animator buttonsSwitchingAni;
@@ -47,6 +48,7 @@ public class SetupQuestions : MonoBehaviour
         p2Side.SetActive(false);
         image.SetActive(false);
         wrongAnswerPopUp.SetActive(false);
+        winnerPopUp.SetActive(false);
 
         //Gets all of the questions that are in the Questions folder
         LoadQuestions();
@@ -113,6 +115,7 @@ public class SetupQuestions : MonoBehaviour
     {
         timer.ResetTime();
 
+        //this turns off the buttons when the animation is playing
         for (int i = 0; i < answerButtonActivation.Length; i++)
         {
             answerButtonActivation[i].enabled = false;
@@ -206,6 +209,32 @@ public class SetupQuestions : MonoBehaviour
         LoadNewQuestion();
     }
 
+    //This is called in the Attack Buttons script
+    public void WinCondition(Slider p1Health, Slider p2Health)
+    {
+        if (p1Health.value < 0.1f || p2Health.value < 0.1f)
+        {
+            winnerPopUp.SetActive(true);
+
+            if (p2Turn)
+            {
+                winner.text = "Player 2 Wins!";
+            }
+            else if (p1Turn)
+            {
+                winner.text = "Player 1 Wins!";
+            }
+
+            p2AttackButtons.SetActive(false);
+            p1AttackButtons.SetActive(false);
+        }
+        else
+        {
+            SwitchTurns();
+        }
+    }
+
+    //this is to turn off the buttons so that they can't be pressed when the animation is playing;
     public IEnumerator DelayForAnimation()
     {
         yield return new WaitForSeconds(2.2f);

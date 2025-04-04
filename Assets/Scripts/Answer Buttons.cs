@@ -9,8 +9,12 @@ public class AnswerButtons : MonoBehaviour
     private SetupQuestions setupQuestions;
     private Timer timer;
     private PlayersSetup playersSetup;
+
     private playerActions playerActions;
-    private int p1RAStreak = 0;
+    private attacker1 attacker1;
+    private healer1 healer1;
+
+    private int p1RAStreak = 0; //RA (right answer) streak
     private int p2RAStreak = 0;
     public GameObject player1;
     public GameObject player2;
@@ -37,10 +41,12 @@ public class AnswerButtons : MonoBehaviour
         if(setupQuestions.p1Turn)
         {
             playerActions = player1.GetComponent<playerActions>();
+            //attacker1 = player1.GetComponent<attacker1>();
         }
         else if(setupQuestions.p2Turn)
         {
             playerActions = player2.GetComponent<playerActions>();
+            //healer1 = player2.GetComponent<healer1>();
         }
 
         if (isCorrect)
@@ -54,18 +60,22 @@ public class AnswerButtons : MonoBehaviour
 
                 if(playersSetup.p1SPMeter < 10)
                 {
+                    //if the player manages to get 5 or more correct answers in a row then the attack bar goes up by 2
                     if (p1RAStreak >= 5)
                     {
                         Debug.Log("action charges for p1 was " + playerActions.actionCharges);
                         playersSetup.p1SPMeter += 2;
                         playerActions.actionCharges += 2;
+                        //attacker1.actionCharges += 2;
                         Debug.Log("action charges for p1 now is " + playerActions.actionCharges);
                     }
                     else
                     {
+                        //this is the normal amount of attack bars they get
                         Debug.Log("action charges for p1 was " + playerActions.actionCharges);
                         playersSetup.p1SPMeter += 1;
                         playerActions.actionCharges += 1;
+                        //attacker1.actionCharges += 1;
                         Debug.Log("action charges for p1 now is " + playerActions.actionCharges);
                     }
                 }
@@ -79,18 +89,22 @@ public class AnswerButtons : MonoBehaviour
 
                 if (playersSetup.p2SPMeter < 10)
                 {
+                    //if the player manages to get 5 or more correct answers in a row then the attack bar goes up by 2
                     if (p2RAStreak >= 5)
                     {
                         Debug.Log("action charges for p2 was " + playerActions.actionCharges);
                         playersSetup.p2SPMeter += 2;
                         playerActions.actionCharges += 2;
+                        //healer1.actionCharges += 2;
                         Debug.Log("action charges for p2 now is " + playerActions.actionCharges);
                     }
                     else
                     {
+                        //this is the normal amount of attack bars they get
                         Debug.Log("action charges for p2 was " + playerActions.actionCharges);
                         playersSetup.p2SPMeter += 1;
                         playerActions.actionCharges += 1;
+                        //healer1.actionCharges += 1;
                         Debug.Log("action charges for p2 now is " + playerActions.actionCharges);
                     }
                 }
@@ -110,6 +124,7 @@ public class AnswerButtons : MonoBehaviour
         {
             Debug.Log("Wrong");
 
+            //this is for reseting the RAStreak if they get an answer wrong
             if (setupQuestions.p1Turn)
             {
                 p1RAStreak = 0;
